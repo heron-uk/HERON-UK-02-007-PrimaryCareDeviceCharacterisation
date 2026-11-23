@@ -65,8 +65,4 @@ cdm <- cdmFromCon(
 )
 
 # Run study ----
-# proce
-procedures_to_run <- c("hip",
-                       "lens",
-                       "pacemaker")
 source(here("runStudy.R"))

@@ -1,3 +1,7 @@
+
+to_run <- c("cgm","smart_insulin_pen",
+            "asthma","insomnia","copd")
+
 # create logger ----
 resultsFolder <- here("results")
 if(!dir.exists(resultsFolder)){
@@ -9,24 +13,33 @@ logMessage("LOG CREATED")
 
 
 # cohorts ----
-if("hip" %in% procedures_to_run){
-  logMessage("GETTING HIP COHORTS")
-  source(here("hip", "cohorts", "instantiateCohorts.R"))
+if("cgm" %in% to_run){
+  logMessage("GETTING CGM COHORTS")
+  source(here("cgm", "cohorts", "instantiateCohorts.R"))
 }
-if("lens" %in% procedures_to_run){
-  logMessage("GETTING LENS COHORTS")
-  source(here("lens", "cohorts", "instantiateCohorts.R"))
+if("smart_insulin_pen" %in% to_run){
+  logMessage("GETTING SMART INSULIN PEN COHORTS")
+  source(here("smart_insulin_pen", "cohorts", "instantiateCohorts.R"))
 }
-if("pacemaker" %in% procedures_to_run){
-  logMessage("GETTING PACEMAKER COHORTS")
-  source(here("pacemaker", "cohorts", "instantiateCohorts.R"))
+
+if("asthma" %in% to_run){
+  logMessage("GETTING ASTHMA COHORTS")
+  source(here("asthma", "cohorts", "instantiateCohorts.R"))
+}
+if("copd" %in% to_run){
+  logMessage("GETTING COPD COHORTS")
+  source(here("copd", "cohorts", "instantiateCohorts.R"))
+}
+if("insomnia" %in% to_run){
+  logMessage("GETTING INSOMNIA COHORTS")
+  source(here("insomnia", "cohorts", "instantiateCohorts.R"))
 }
 
 logMessage("COMBINE INTO SINGLE COHORT TABLE")
 cdm <- do.call(
   what = bind,
   args = c(
-    lapply(procedures_to_run, function(x) cdm[[x]]),
+    lapply(to_run, function(x) cdm[[x]]),
     list(name = "study_cohorts")
   )
 )
@@ -34,10 +47,9 @@ cdm <- do.call(
 # run ----
 logMessage("Running PhenotypeDiagnostics")
 diagnostics <- phenotypeDiagnostics(cdm$study_cohorts,
-                                    populationDiagnostics = list(cohortId = "asthma"),
-                                    cohortDiagnostics = list(compareCohorts = TRUE,
-                                                             cohortId = "asthma"),
-                                    codelistDiagnostics = list(measurementDiagnostics = TRUE))
+                                    cohortDiagnostics = list(compareCohorts = TRUE),
+                                    populationDiagnostics = list(populationDateRange = c(as.Date("2018-01-01"),
+                                                                                         as.Date(NA))))
 
 exportSummarisedResult(diagnostics,
                        minCellCount = minCellCount,
