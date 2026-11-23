@@ -23,7 +23,7 @@ cgm <- list(
   newCodelist()
 cgm <- cgm |>
   unionCodelists("cgm",
-                 keepOriginal = TRUE)
+                 keepOriginal = FALSE)
 
 
 # export codelists

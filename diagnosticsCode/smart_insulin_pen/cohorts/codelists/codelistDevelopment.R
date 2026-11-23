@@ -13,7 +13,7 @@ smart_pen <- list(
   newCodelist()
 smart_pen <- smart_pen |>
   unionCodelists("smart_insulin_pen",
-                 keepOriginal = TRUE)
+                 keepOriginal = FALSE)
 
 # export codelists
 smart_pen |>

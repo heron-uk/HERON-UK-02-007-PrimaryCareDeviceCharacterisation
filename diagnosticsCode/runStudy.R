@@ -1,6 +1,6 @@
 
 to_run <- c("cgm","smart_insulin_pen",
-            "asthma","insomnia","copd")
+            "iud","silver_dressings")
 
 # create logger ----
 resultsFolder <- here("results")
@@ -21,18 +21,13 @@ if("smart_insulin_pen" %in% to_run){
   logMessage("GETTING SMART INSULIN PEN COHORTS")
   source(here("smart_insulin_pen", "cohorts", "instantiateCohorts.R"))
 }
-
-if("asthma" %in% to_run){
-  logMessage("GETTING ASTHMA COHORTS")
-  source(here("asthma", "cohorts", "instantiateCohorts.R"))
+if("iud" %in% to_run){
+  logMessage("GETTING IUD COHORTS")
+  source(here("iud", "cohorts", "instantiateCohorts.R"))
 }
-if("copd" %in% to_run){
-  logMessage("GETTING COPD COHORTS")
-  source(here("copd", "cohorts", "instantiateCohorts.R"))
-}
-if("insomnia" %in% to_run){
-  logMessage("GETTING INSOMNIA COHORTS")
-  source(here("insomnia", "cohorts", "instantiateCohorts.R"))
+if("silver_dressings" %in% to_run){
+  logMessage("GETTING SILVER DRESSINGS COHORTS")
+  source(here("silver_dressings", "cohorts", "instantiateCohorts.R"))
 }
 
 logMessage("COMBINE INTO SINGLE COHORT TABLE")
@@ -48,7 +43,7 @@ cdm <- do.call(
 logMessage("Running PhenotypeDiagnostics")
 diagnostics <- phenotypeDiagnostics(cdm$study_cohorts,
                                     cohortDiagnostics = list(compareCohorts = TRUE),
-                                    populationDiagnostics = list(populationDateRange = c(as.Date("2018-01-01"),
+                                    populationDiagnostics = list(populationDateRange = c(as.Date("2016-01-01"),
                                                                                          as.Date(NA))))
 
 exportSummarisedResult(diagnostics,
