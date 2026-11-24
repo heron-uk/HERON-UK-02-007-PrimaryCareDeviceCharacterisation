@@ -1,6 +1,5 @@
 
-to_run <- c("cgm","smart_insulin_pen",
-            "iud","silver_dressings")
+to_run <- c("cgm","iud","silver_dressings")
 
 # create logger ----
 resultsFolder <- here("results")
@@ -16,10 +15,6 @@ logMessage("LOG CREATED")
 if("cgm" %in% to_run){
   logMessage("GETTING CGM COHORTS")
   source(here("cgm", "cohorts", "instantiateCohorts.R"))
-}
-if("smart_insulin_pen" %in% to_run){
-  logMessage("GETTING SMART INSULIN PEN COHORTS")
-  source(here("smart_insulin_pen", "cohorts", "instantiateCohorts.R"))
 }
 if("iud" %in% to_run){
   logMessage("GETTING IUD COHORTS")

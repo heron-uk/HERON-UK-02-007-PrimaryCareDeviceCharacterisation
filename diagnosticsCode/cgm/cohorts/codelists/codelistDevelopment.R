@@ -1,9 +1,9 @@
 
 # diagnoses/ meds
-list(t1_diabetes = CodelistGenerator::getDescendants(cdm, 201254)$concept_id) |>
-  exportCodelist(here::here("cgm", "cohorts","codelists"), type = "csv")
-list(t2_diabetes = CodelistGenerator::getDescendants(cdm, 201826)$concept_id) |>
-  exportCodelist(here::here("cgm", "cohorts","codelists"), type = "csv")
+# list(t1_diabetes = CodelistGenerator::getDescendants(cdm, 201254)$concept_id) |>
+#   exportCodelist(here::here("cgm", "cohorts","codelists"), type = "csv")
+# list(t2_diabetes = CodelistGenerator::getDescendants(cdm, 201826)$concept_id) |>
+#   exportCodelist(here::here("cgm", "cohorts","codelists"), type = "csv")
 
 # device snomed
 # nb Accu-Chek SmartGuide Sensor not in omop dmd (added January 2026)
