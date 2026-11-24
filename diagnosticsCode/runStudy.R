@@ -1,5 +1,6 @@
 
-to_run <- c("cgm","iud","silver_dressings")
+to_run <- c("cgm","iud","silver_dressings",
+            "asthma","copd","insomnia")
 
 # create logger ----
 resultsFolder <- here("results")
@@ -23,6 +24,18 @@ if("iud" %in% to_run){
 if("silver_dressings" %in% to_run){
   logMessage("GETTING SILVER DRESSINGS COHORTS")
   source(here("silver_dressings", "cohorts", "instantiateCohorts.R"))
+}
+if("asthma" %in% to_run){
+  logMessage("GETTING ASTHMA COHORTS")
+  source(here("asthma", "cohorts", "instantiateCohorts.R"))
+}
+if("copd" %in% to_run){
+  logMessage("GETTING COPD COHORTS")
+  source(here("copd", "cohorts", "instantiateCohorts.R"))
+}
+if("insomnia" %in% to_run){
+  logMessage("GETTING INSOMNIA COHORTS")
+  source(here("insomnia", "cohorts", "instantiateCohorts.R"))
 }
 
 logMessage("COMBINE INTO SINGLE COHORT TABLE")
