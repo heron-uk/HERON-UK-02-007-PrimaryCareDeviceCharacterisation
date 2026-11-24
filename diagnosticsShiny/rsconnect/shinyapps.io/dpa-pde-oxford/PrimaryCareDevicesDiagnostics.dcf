@@ -1,0 +1,13 @@
+name: PrimaryCareDevicesDiagnostics
+title: PrimaryCareDevicesDiagnostics
+username: dpa-pde-oxford
+account: dpa-pde-oxford
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 18510826
+appGuid:
+bundleId: 12861385
+url: https://dpa-pde-oxford.shinyapps.io/PrimaryCareDevicesDiagnostics/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
