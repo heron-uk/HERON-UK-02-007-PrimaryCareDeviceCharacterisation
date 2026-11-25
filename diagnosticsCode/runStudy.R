@@ -11,6 +11,15 @@ if(!dir.exists(resultsFolder)){
 createLogFile(logFile = tempfile(pattern = "log_{date}_{time}"))
 logMessage("LOG CREATED")
 
+# add sleepio app -----
+if(stringr::str_detect(tolower(cdmName(cdm)), "aurum")){
+  cdm$observation <- cdm$observation |>
+    mutate(observation_concept_id = if_else(
+      observation_source_concept_id == 481981000001107,
+      37208616L,
+      observation_concept_id
+    ))
+}
 
 # cohorts ----
 if("cgm" %in% to_run){
