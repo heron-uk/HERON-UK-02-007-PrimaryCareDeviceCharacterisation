@@ -5,6 +5,7 @@
 studyCode/codeToRunLocal.R
 studyCode/results/*csv
 studyCode/results/*txt
+diagnosticsCode/codeToRunLocal.R
 diagnosticsShiny/data/raw/phenotyper_results_CPRD GOLD_2026_11_23.csv
 diagnosticsShiny/data/appData.qs
 studyShiny/data/studyData.RData
