@@ -261,7 +261,8 @@ table((cohort_code_dre |> filter(is.na(Brand)) )$type)
 
 
 #Step 3
-dressing_codes <- importCodelist(here::here("antimicrobial_dressings", "cohorts", "codelists"))
+dressing_codes <- importCodelist(here("..", "diagnosticsCode",
+                                             "antimicrobial_dressings", "cohorts", "codelists"))
 cdm$dre <- cdm$dre |>
   addConceptIntersectFlag(conceptSet = silver_dressing_codes ) |>
   addConceptIntersectFlag(conceptSet = silver_dressing_codes )
