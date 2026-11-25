@@ -21,7 +21,7 @@ if("iud" %in% to_run){
   logMessage("GETTING IUD COHORTS")
   source(here("iud", "cohorts", "instantiateCohorts.R"))
 }
-if("silver_dressings" %in% to_run){
+if("antimicrobial_dressings" %in% to_run){
   logMessage("GETTING ANTIMICROBIAL DRESSINGS COHORTS")
   source(here("antimicrobial_dressings", "cohorts", "instantiateCohorts.R"))
 }
