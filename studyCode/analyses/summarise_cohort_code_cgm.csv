@@ -1,10 +1,10 @@
-Cohort name,Codelist name,Standard concept name,Standard concept ID,Source concept name,Source concept ID,Source concept value,Type concept id,Type concept name,Table,CPRD GOLD: Person count,CPRD GOLD: Record count
-cgm,cgm,Dexcom G6 Sensor,891070,Dexcom G6 Sensor,891070,11204022,32838,EHR prescription,device_exposure,<5,5
-cgm,cgm,Dexcom G7 Sensor,885453,Dexcom G7 Sensor,885453,11205022,32838,EHR prescription,device_exposure,6,7
-cgm,cgm,Dexcom One Sensor,36964253,Dexcom One Sensor,36964253,02978022,32838,EHR prescription,device_exposure,"1,199","10,926"
-cgm,cgm,Dexcom One+ Sensor,886971,Dexcom One+ Sensor,886971,09390022,32838,EHR prescription,device_exposure,984,"5,300"
-cgm,cgm,FreeStyle Libre 2 Plus Sensor,888893,FreeStyle Libre 2 Plus Sensor,888893,09168022,32838,EHR prescription,device_exposure,"19,401","89,189"
-cgm,cgm,FreeStyle Libre 2 Sensor,35889967,FreeStyle Libre 2 Sensor,35889967,96330021,32838,EHR prescription,device_exposure,"29,343","561,552"
-cgm,cgm,FreeStyle Libre 3 Plus Sensor,837419,FreeStyle Libre 3 Plus Sensor,837419,16791022,32838,EHR prescription,device_exposure,150,278
-cgm,cgm,FreeStyle Libre 3 Sensor,880079,FreeStyle Libre 3 Sensor,880079,08402022,32838,EHR prescription,device_exposure,434,"2,469"
-cgm,cgm,FreeStyle Libre Sensor,40677414,FreeStyle Libre Sensor (Abbott Laboratories Ltd),42524374,78908021,32838,EHR prescription,device_exposure,"13,835","260,315"
+Cohort name,Codelist name,Standard concept name,Standard concept ID,Source concept name,Source concept ID,Source concept value,Type concept id,Type concept name,Table
+cgm,cgm,Dexcom G6 Sensor,891070,Dexcom G6 Sensor,891070,11204022,32838,EHR prescription,device_exposure
+cgm,cgm,Dexcom G7 Sensor,885453,Dexcom G7 Sensor,885453,11205022,32838,EHR prescription,device_exposure
+cgm,cgm,Dexcom One Sensor,36964253,Dexcom One Sensor,36964253,02978022,32838,EHR prescription,device_exposure
+cgm,cgm,Dexcom One+ Sensor,886971,Dexcom One+ Sensor,886971,09390022,32838,EHR prescription,device_exposure
+cgm,cgm,FreeStyle Libre 2 Plus Sensor,888893,FreeStyle Libre 2 Plus Sensor,888893,09168022,32838,EHR prescription,device_exposure
+cgm,cgm,FreeStyle Libre 2 Sensor,35889967,FreeStyle Libre 2 Sensor,35889967,96330021,32838,EHR prescription,device_exposure
+cgm,cgm,FreeStyle Libre 3 Plus Sensor,837419,FreeStyle Libre 3 Plus Sensor,837419,16791022,32838,EHR prescription,device_exposure
+cgm,cgm,FreeStyle Libre 3 Sensor,880079,FreeStyle Libre 3 Sensor,880079,08402022,32838,EHR prescription,device_exposure
+cgm,cgm,FreeStyle Libre Sensor,40677414,FreeStyle Libre Sensor (Abbott Laboratories Ltd),42524374,78908021,32838,EHR prescription,device_exposure
