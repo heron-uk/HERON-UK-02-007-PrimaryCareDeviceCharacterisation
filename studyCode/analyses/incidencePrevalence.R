@@ -5,7 +5,7 @@ cdm <- generateDenominatorCohortSet(
   cdm = cdm,
   name = "inc_denominator",
   cohortDateRange = study_period,
-  ageGroup = list(c(0, 150)),
+  ageGroup = list(c(0, 150), c(18, 55)),
   sex = c("Both", "Female"),
   daysPriorObservation = 365
 )
@@ -15,6 +15,7 @@ results[["incidence"]] <- estimateIncidence(
   cdm = cdm,
   denominatorTable = "inc_denominator",
   outcomeTable = "study_cohorts",
+  outcomeCohortId = c("cgm", "iud", "antimicrobial_dressing"),
   interval = c("years", "overall"),
   outcomeWashout = Inf,
   repeatedEvents = FALSE

@@ -1,4 +1,3 @@
-
 # Check codeToRun inputs ----
 validateCdmArgument(
   cdm = cdm,
@@ -9,7 +8,7 @@ assertNumeric(min_cell_count)
 
 # Define analysis settings -----
 results_folder <- here("results")
-study_period <- c(as.Date("2018-01-01"), as.Date(NA))
+study_period <- c(as.Date("2015-01-01"), as.Date(NA))
 
 # Initialise list to store results as we go -----
 results <- list()
@@ -36,6 +35,7 @@ results[["attrition"]] <- summariseCohortAttrition(cdm$study_cohorts)
 # Run analyses ----
 logMessage("Run study analyses")
 source(here("analyses", "cohortCharacteristics.R"))
+source(here("analyses", "incidencePrevalence.R"))
 logMessage("Analyses finished")
 
 # Finish ----
