@@ -1,46 +1,4 @@
 
-#####
-
-##IUD
-#hormonal vs non hormonal
-#long term : hormonal, unexpected pregnancy
-#unintended preg, expulsion, perforation, clincally relevent comp
-#link to preocdedure code - are there IUD insert/removal codes?
-#IUD records, charactsie, summarisecharacteristics() of those who have record procedure
-#codes for hormonal IUSs
-#first ever record
-#365 day prior history
-#age brand
-#windows (366-5yr, 5yr-10yr)
-#discuss how estimate duration till new mplant or removal code or x years (according to type) - discuss in paper
-
-
-#####
-library(ggplot2)
-library(treemapify)
-library(colorspace)
-library(scales)
-library(readr)
-library(tidyverse)
-library(OmopSketch)
-library(cowplot)
-library(RColorBrewer)
-library(dplyr)
-library(omopgenerics)
-library(CohortConstructor)
-library(CDMConnector)
-library(CodelistGenerator)
-library(omock)
-library(duckdb)
-library(CDMConnector)
-library(dplyr)
-library(tidyr)
-library(here)
-
-source("iud/cohorts/codelists/codelistDevelopment.R")
-source("iud/cohorts/instantiateCohorts.R")
-source("analyses/instantiateCohorts.R")
-
 ##### IUD ####
 
 #Step 1
@@ -88,124 +46,42 @@ data.frame(c(iud_codes$iud), c(iud_codes$iud %in% cohort_code_iud$`concept_ID`))
 
 
 #Step 3
+#Step 3a: Duration
+#Step 3a.1 - 5 years
+(cohort_code_iud %>% filter(Duration=="5 years") )$concept_ID
+iud_5years <- list("5years"= c(21399040, 21470537, 21348967, 21450903, 21441018, 21349000, 21327814, 21350078, 21470538,
+                   21337994, 21450144, 21390888, 21329906, 21421598, 21360574, 21421597, 21462392, 21399039,
+                   21368651 )) |> newCodelist()
+#Step 3a.2 - 10 years
+(cohort_code_iud %>% filter(Duration=="5 years") )$concept_ID
+iud_10years <- list("10years"=c(21430445, 21389549, 21389357, 21411274, 21368650, 21481322, 21388824)) |>
+  newCodelist()
+#Step 3b: Brand
+#Step 3b.1 - Bayer Plc
+(cohort_code_iud %>% filter(Brand=="Bayer Plc") )$concept_ID
+iud_BayerPlc <- list("BayerPlc"=c(21399040)) |> newCodelist()
+#Step 3b.2 - Durbin Plc
+(cohort_code_iud %>% filter(Brand=="Durbin Plc") )$concept_ID
+iud_DurbinPlc <- list("DurbinPlc"=c(21470537, 21348967, 21450903, 21441018, 21430445, 21389549, 21349000)) |>
+  newCodelist()
+#
+(cohort_code_iud %>% filter(Brand=="Family Planning Sales Ltd") )$concept_ID
+(cohort_code_iud %>% filter(Brand=="Farla Medical Ltd") )$concept_ID
+(cohort_code_iud %>% filter(Brand=="Janssen-Cilag Ltd") )$concept_ID
+(cohort_code_iud %>% filter(Brand=="Organon Laboratories Ltd") )$concept_ID
+(cohort_code_iud %>% filter(Brand=="R.F. Medical Supplies Ltd") )$concept_ID
+(cohort_code_iud %>% filter(Brand=="Schering Health Care Ltd") )$concept_ID
+(cohort_code_iud %>% filter(Brand=="Williams Medical Supplies Ltd") )$concept_ID
+
+
+
+
 cdm$iud <- cdm$iud |>
   addConceptIntersectField(conceptSet = iud_codes,field = "device_concept_id",allowDuplicates = TRUE) |>
-  rename("device_concept_id"="device_concept_id_iud_0_to_inf")
+  rename("device_concept_id"="device_concept_id_iud_0_to_inf") |>
+  addConceptIntersectFlag(conceptSet = iud_5years) |>
+  addConceptIntersectFlag(conceptSet = iud_10years)
 
-for (i in 1:nrow(cohort_code_iud)) {
-  indiv_iud_code <- list(iud=cohort_code_iud$concept_ID[[i]]) |> newCodelist()
-  cdm[[paste0("iud_",cohort_code_iud$concept_ID[[i]])]] <-
-    conceptCohort(cdm = cdm,
-                conceptSet = indiv_iud_code,
-                name = paste0("iud_",cohort_code_iud$concept_ID[[i]]) ,
-                exit = "event_start_date")
-}
-cdm$iud <- { cdm$iud |>
-
-  #21399040 Nova-T 380 Bayer Plc 5 years (1)
-  addCohortIntersectFlag(targetCohortTable = "iud_21399040" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21399040"=(ncol(cdm$iud)+1)) |>
-
-  #21470537 Flexi-T 300 Durbin Plc 5 years (2)
-  addCohortIntersectFlag(targetCohortTable = "iud_21470537" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21470537"=(ncol(cdm$iud)+2)) |>
-
-  #21348967 Flexi-T+ 380 Durbin Plc 5 years (3)
-  addCohortIntersectFlag(targetCohortTable = "iud_21348967" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21348967"=(ncol(cdm$iud)+3)) |>
-
-  #21450903 Load 375 Durbin Plc 5 years (4)
-  addCohortIntersectFlag(targetCohortTable = "iud_21450903" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21450903"=(ncol(cdm$iud)+4)) |>
-
-  #21441018 Mini TT380 Slimline Durbin Plc 5 years (5)
-  addCohortIntersectFlag(targetCohortTable = "iud_21441018" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21441018"=(ncol(cdm$iud)+5)) |>
-
-  #21430445 TT380 Slimline Durbin Plc 10 years (6)
-  addCohortIntersectFlag(targetCohortTable = "iud_21430445" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21430445"=(ncol(cdm$iud)+6)) |>
-
-  #21389549 UT380 Short Durbin Plc 10 years (7)
-  addCohortIntersectFlag(targetCohortTable = "iud_21389549" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21389549"=(ncol(cdm$iud)+7)) |>
-
-  #21349000
-  addCohortIntersectFlag(targetCohortTable = "iud_21349000" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21349000"=(ncol(cdm$iud)+8)) |>
-
-  #21327814
-  addCohortIntersectFlag(targetCohortTable = "iud_21327814" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21327814"=(ncol(cdm$iud)+9)) |>
-
-  #21350078
-  addCohortIntersectFlag(targetCohortTable = "iud_21350078" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21350078"=(ncol(cdm$iud)+10)) |>
-
-  #21389357 Gyne-T 380S
-  addCohortIntersectFlag(targetCohortTable = "iud_21389357" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21389357"=(ncol(cdm$iud)+11)) |>
-
-  #21470538 Multiload Cu250 Short
-  addCohortIntersectFlag(targetCohortTable = "iud_21470538" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21470538"=(ncol(cdm$iud)+12)) |>
-
-  #21337994 Multiload Cu250 (13)
-  addCohortIntersectFlag(targetCohortTable = "iud_21337994" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21337994"=(ncol(cdm$iud)+13)) |>
-
-  #21450144 Multiload Cu375 (14)
-  addCohortIntersectFlag(targetCohortTable = "iud_21450144" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21450144"=(ncol(cdm$iud)+14)) |>
-
-  #21390888 Ancora 375 Cu (15)
-  addCohortIntersectFlag(targetCohortTable = "iud_21390888" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21390888"=(ncol(cdm$iud)+15)) |>
-
-  #21411274 Copper T380 A (16)
-  addCohortIntersectFlag(targetCohortTable = "iud_21411274" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21411274"=(ncol(cdm$iud)+16)) |>
-
-  #21329906 Eurogine T 380 Ag mini
-  addCohortIntersectFlag(targetCohortTable = "iud_21329906" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21329906"=(ncol(cdm$iud)+17)) |>
-
-  #21421598 Eurogine T 380 Ag normal (18)
-  addCohortIntersectFlag(targetCohortTable = "iud_21421598" , window = list(c(0, 0)), name="iud" ) |>
-  rename("iud_21421598"=(ncol(cdm$iud)+18)) |>
-
-    #21360574 Eurogine T 380 Cu mini
-    addCohortIntersectFlag(targetCohortTable = "iud_21360574" , window = list(c(0, 0)), name="iud" ) |>
-    rename("iud_21360574"=(ncol(cdm$iud)+19)) |>
-
-    #21421597 Eurogine T 380 Cu normal
-    addCohortIntersectFlag(targetCohortTable = "iud_21421597" , window = list(c(0, 0)), name="iud" ) |>
-    rename("iud_21421597"=(ncol(cdm$iud)+20)) |>
-
-    #21462392 Novaplus T 380 Ag maxi (21)
-    addCohortIntersectFlag(targetCohortTable = "iud_21462392" , window = list(c(0, 0)), name="iud" ) |>
-    rename("iud_21462392"=(ncol(cdm$iud)+21)) |>
-
-    #21399039 Nova-T
-    addCohortIntersectFlag(targetCohortTable = "iud_21399039" , window = list(c(0, 0)), name="iud" ) |>
-    rename("iud_21399039"=(ncol(cdm$iud)+22)) |>
-
-    #21368650 GyneFix Williams Medical
-    addCohortIntersectFlag(targetCohortTable = "iud_21368650" , window = list(c(0, 0)), name="iud" ) |>
-    rename("iud_21368650"=(ncol(cdm$iud)+23)) |>
-
-    #21368651 Multi-Safe 375 Williams Medical
-    addCohortIntersectFlag(targetCohortTable = "iud_21368651" , window = list(c(0, 0)), name="iud" ) |>
-    rename("iud_21368651"=(ncol(cdm$iud)+24)) |>
-
-    #21481322 Neo-Safe T380 Williams Medical (25)
-    addCohortIntersectFlag(targetCohortTable = "iud_21481322" , window = list(c(0, 0)), name="iud" ) |>
-    rename("iud_21481322"=(ncol(cdm$iud)+25)) |>
-
-    #21388824 T-Safe 380A QL Williams Medical (26)
-    addCohortIntersectFlag(targetCohortTable = "iud_21388824" , window = list(c(0, 0)), name="iud" ) |>
-    rename("iud_21388824"=(ncol(cdm$iud)+26))
-}
 
 
 #
