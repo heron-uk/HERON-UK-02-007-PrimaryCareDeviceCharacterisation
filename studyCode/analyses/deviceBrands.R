@@ -39,13 +39,13 @@ library(here)
 
 source("iud/cohorts/codelists/codelistDevelopment.R")
 source("iud/cohorts/instantiateCohorts.R")
-source("cohorts/instantiateCohorts.R")
+source("analyses/instantiateCohorts.R")
 
 ##### IUD ####
 
 #Step 1
 #Import IUD brand & model
-summarise_cohort_code_iud <- read_csv("cohorts/summarise_cohort_code_iud.csv")
+summarise_cohort_code_iud <- read_csv("analyses/summarise_cohort_code_iud.csv")
 cohort_code_iud <- summarise_cohort_code_iud[c(3:8,11,12)]
 glimpse(cohort_code_iud)
 #Clean names
@@ -212,7 +212,7 @@ cdm$iud <- { cdm$iud |>
 #### CGM ####
 
 #Step 1
-summarise_cohort_code_cgm <- read_csv("cohorts/summarise_cohort_code_cgm.csv")
+summarise_cohort_code_cgm <- read_csv("analyses/summarise_cohort_code_cgm.csv")
 cohort_code_cgm <- summarise_cohort_code_cgm[c(4,3,5:7,11,12)]
 glimpse(cohort_code_cgm )
 cohort_code_cgm <- cohort_code_cgm |>
@@ -235,15 +235,39 @@ data.frame(c(cgm_codes$cgm), c(cgm_codes$cgm %in% cohort_code_cgm$concept_ID)) |
   rename(concept_ID=1,inc=2) |> filter(inc=="FALSE")
 
 #Step 3
+cgm_codes_all <- { list(
+  cgm_dexcom_g6 = c(891070, 882115, 888630), # Dexcom G6 Sensor
+  cgm_dexcom_g7 = c(885453, 889729, 891653), # Dexcom G7 Sensor
+  cgm_dexcom_one = c(36964253, 36924428, 36944703), # Dexcom One Sensor
+  cgm_dexcom_one_plus = c(886971, 885073), # Dexcom One+
+  cgm_freestyle_libre_2_plus = c(888893, 896954, 35402057), # FreeStyle Libre 2 Plus Sensor
+  cgm_freestyle_libre_2 = c(35889967, 35891819), # FreeStyle Libre 2 Sensor
+  cgm_freestyle_libre_3_plus = c(837419, 879292), # FreeStyle Libre 3 Plus Sensor
+  cgm_freestyle_libre_3 = c(880079, 897543), # FreeStyle Libre 3 Sensor
+  cgm_freestyle_libre_plus = c(40677414, 42524374, 40675740), #FreeStyle Libre Sensor
+  cgm_a8_touchcare_nano = c(886918, 891479), #A8 TouchCare Nano Sensor
+  cgm_caresens_air= c(893573, 897329) # CareSens Air Sensor
+) |>
+  newCodelist() }
+cgm_model_codes <- { list(
+  cgm_dexcom = c(891070, 882115, 888630,885453, 889729, 891653, 36964253, 36924428, 36944703,886971, 885073),
+  cgm_freestyle_libre = c(888893, 896954, 35402057,35889967, 35891819,837419, 879292,880079, 897543,40677414,
+                          42524374, 40675740),
+  cgm_a8_touchcare_nano = c(886918, 891479),
+  cgm_caresens_air= c(893573, 897329) ) |>
+  newCodelist() }
+cgm_dexcom_codes <- list(  cgm_dexcom = cgm_model_codes$cgm_dexcom ) |> newCodelist()
+cgm_freestyle_libre <- list(  cgm_freestyle_libre = cgm_model_codes$cgm_freestyle_libre ) |> newCodelist()
 cdm$cgm <- cdm$cgm |>
-  addConceptIntersectField(conceptSet = cgm_codes,field = "device_concept_id",allowDuplicates = TRUE) |>
-  rename("device_concept_id"="device_concept_id_cgm_0_to_inf")
+  addConceptIntersectFlag(conceptSet = cgm_dexcom_codes,window=c(0,0)) |>
+  addConceptIntersectFlag(conceptSet = cgm_freestyle_libre,window=c(0,0))
+
 
 #
 #### Dressings ####
 
 #Step 1
-summarise_cohort_code_dressings <- unique(read_csv("cohorts/summarise_cohort_code_use_dressings.csv"))
+summarise_cohort_code_dressings <- unique(read_csv("analyses/summarise_cohort_code_use_dressings.csv"))
 cohort_code_dre <- summarise_cohort_code_dressings[c(2,4,3,5,11,12)]|>
   rename(concept_ID=2,concept_name=3,Person_count=5,Record_count=6,type=1) |>
   filter(!type=="antimicrobial_dressing")
