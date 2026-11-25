@@ -1,27 +1,27 @@
-Cohort name,Codelist name,Standard concept name,Standard concept ID,Source concept name,Source concept ID,Source concept value,Type concept id,Type concept name,Table,CPRD GOLD: Person count,CPRD GOLD: Record count
-iud,iud,Ancora 375 Cu intrauterine contraceptive device,21390888,Ancora 375 Cu intrauterine contraceptive device (R.F. Medical Supplies Ltd),37771468,40639020,32838,EHR prescription,device_exposure,6,6
-iud,iud,Copper T380 A intrauterine contraceptive device,21411274,Copper T380 A intrauterine contraceptive device (R.F. Medical Supplies Ltd),37771470,40640020,32838,EHR prescription,device_exposure,"1,622","1,719"
-iud,iud,Eurogine T 380 Ag intrauterine contraceptive device mini,21329906,Novaplus T 380 Ag intrauterine contraceptive device mini (R.F. Medical Supplies Ltd),37772170,41955020,32838,EHR prescription,device_exposure,21,22
-iud,iud,Eurogine T 380 Ag intrauterine contraceptive device normal,21421598,Novaplus T 380 Ag intrauterine contraceptive device normal (R.F. Medical Supplies Ltd),37771476,40643020,32838,EHR prescription,device_exposure,33,33
-iud,iud,Eurogine T 380 Cu intrauterine contraceptive device mini,21360574,Novaplus T 380 Cu intrauterine contraceptive device mini (R.F. Medical Supplies Ltd),37776868,41957020,32838,EHR prescription,device_exposure,70,71
-iud,iud,Eurogine T 380 Cu intrauterine contraceptive device normal,21421597,Novaplus T 380 Cu intrauterine contraceptive device normal (R.F. Medical Supplies Ltd),37771472,40641020,32838,EHR prescription,device_exposure,85,91
-iud,iud,Flexi-T 300 intrauterine contraceptive device,21470537,Flexi-T 300 intrauterine contraceptive device (Durbin Plc),45742553,81011020,32838,EHR prescription,device_exposure,228,243
-iud,iud,Flexi-T+ 380 intrauterine contraceptive device,21348967,Flexi-T+ 380 intrauterine contraceptive device (Durbin Plc),45744713,94440020,32838,EHR prescription,device_exposure,101,107
-iud,iud,Gyne-T 380S intrauterine device,21389357,Gyne-T 380S intrauterine device (Janssen-Cilag Ltd),45733485,79718020,32838,EHR prescription,device_exposure,483,494
-iud,iud,GyneFix intrauterine contraceptive device,21368650,GyneFix intrauterine contraceptive device (Williams Medical Supplies Ltd),45733502,80159020,32838,EHR prescription,device_exposure,185,203
-iud,iud,GyneFixPT intrauterine contraceptive device,21327814,GyneFixPT intrauterine contraceptive device (Family Planning Sales Ltd),45742532,80160020,32838,EHR prescription,device_exposure,12,12
-iud,iud,Load 375 intrauterine contraceptive device,21450903,Load 375 intrauterine contraceptive device (Durbin Plc),45742930,95068020,32838,EHR prescription,device_exposure,6,6
-iud,iud,Mini TT380 Slimline intrauterine contraceptive device,21441018,Mini TT380 Slimline intrauterine contraceptive device (Durbin Plc),37691792,1081021,32838,EHR prescription,device_exposure,668,707
-iud,iud,Multi-Safe 375 intrauterine contraceptive device,21368651,Multi-Safe 375 intrauterine contraceptive device (Williams Medical Supplies Ltd),45740978,87040020,32838,EHR prescription,device_exposure,35,36
-iud,iud,Multiload Cu250 Short intrauterine contraceptive device,21470538,Multiload Cu250 Short intrauterine contraceptive device (Organon Laboratories Ltd),45739887,56290020,32838,EHR prescription,device_exposure,331,369
-iud,iud,Multiload Cu250 intrauterine contraceptive device,21337994,Multiload Cu250 intrauterine contraceptive device (Organon Laboratories Ltd),45732589,56286020,32838,EHR prescription,device_exposure,"2,739","3,156"
-iud,iud,Multiload Cu375 intrauterine contraceptive device,21450144,Multiload Cu375 intrauterine contraceptive device (Organon Laboratories Ltd),45743543,59807020,32838,EHR prescription,device_exposure,"4,818","5,403"
-iud,iud,Neo-Safe T380 intrauterine contraceptive device,21481322,Neo-Safe T380 intrauterine contraceptive device (Williams Medical Supplies Ltd),45735661,90708020,32838,EHR prescription,device_exposure,459,472
-iud,iud,Nova-T 380 intrauterine contraceptive device,21399040,Nova-T 380 intrauterine contraceptive device (Bayer Plc),45742614,82859020,32838,EHR prescription,device_exposure,"28,514","32,737"
-iud,iud,Nova-T intrauterine contraceptive device,21399039,Nova-T intrauterine contraceptive device (Schering Health Care Ltd),45735926,48439020,32838,EHR prescription,device_exposure,"9,519","10,809"
-iud,iud,Novaplus T 380 Ag intrauterine contraceptive device maxi,21462392,Novaplus T 380 Ag intrauterine contraceptive device maxi (R.F. Medical Supplies Ltd),37772172,41956020,32838,EHR prescription,device_exposure,<5,<5
-iud,iud,Optima TCu 380A intrauterine contraceptive device,21350078,Optima TCu 380A intrauterine contraceptive device (Farla Medical Ltd),45730406,10675021,32838,EHR prescription,device_exposure,203,218
-iud,iud,T-Safe 380A QL intrauterine contraceptive device,21388824,T-Safe 380A QL intrauterine contraceptive device (Williams Medical Supplies Ltd),45731774,82861020,32838,EHR prescription,device_exposure,"26,327","29,357"
-iud,iud,TT380 Slimline intrauterine contraceptive device,21430445,TT380 Slimline intrauterine contraceptive device (Durbin Plc),45739413,95060020,32838,EHR prescription,device_exposure,"6,923","7,681"
-iud,iud,UT380 Short intrauterine contraceptive device,21389549,UT380 Short intrauterine contraceptive device (Durbin Plc),45735768,95062020,32838,EHR prescription,device_exposure,193,207
-iud,iud,UT380 Standard intrauterine contraceptive device,21349000,UT380 Standard intrauterine contraceptive device (Durbin Plc),45737616,95066020,32838,EHR prescription,device_exposure,378,398
+Cohort name,Codelist name,Standard concept name,Standard concept ID,Source concept name,Source concept ID,Source concept value,Type concept id,Type concept name,Table
+iud,iud,Ancora 375 Cu intrauterine contraceptive device,21390888,Ancora 375 Cu intrauterine contraceptive device (R.F. Medical Supplies Ltd),37771468,40639020,32838,EHR prescription,device_exposure
+iud,iud,Copper T380 A intrauterine contraceptive device,21411274,Copper T380 A intrauterine contraceptive device (R.F. Medical Supplies Ltd),37771470,40640020,32838,EHR prescription,device_exposure
+iud,iud,Eurogine T 380 Ag intrauterine contraceptive device mini,21329906,Novaplus T 380 Ag intrauterine contraceptive device mini (R.F. Medical Supplies Ltd),37772170,41955020,32838,EHR prescription,device_exposure
+iud,iud,Eurogine T 380 Ag intrauterine contraceptive device normal,21421598,Novaplus T 380 Ag intrauterine contraceptive device normal (R.F. Medical Supplies Ltd),37771476,40643020,32838,EHR prescription,device_exposure
+iud,iud,Eurogine T 380 Cu intrauterine contraceptive device mini,21360574,Novaplus T 380 Cu intrauterine contraceptive device mini (R.F. Medical Supplies Ltd),37776868,41957020,32838,EHR prescription,device_exposure
+iud,iud,Eurogine T 380 Cu intrauterine contraceptive device normal,21421597,Novaplus T 380 Cu intrauterine contraceptive device normal (R.F. Medical Supplies Ltd),37771472,40641020,32838,EHR prescription,device_exposure
+iud,iud,Flexi-T 300 intrauterine contraceptive device,21470537,Flexi-T 300 intrauterine contraceptive device (Durbin Plc),45742553,81011020,32838,EHR prescription,device_exposure
+iud,iud,Flexi-T+ 380 intrauterine contraceptive device,21348967,Flexi-T+ 380 intrauterine contraceptive device (Durbin Plc),45744713,94440020,32838,EHR prescription,device_exposure
+iud,iud,Gyne-T 380S intrauterine device,21389357,Gyne-T 380S intrauterine device (Janssen-Cilag Ltd),45733485,79718020,32838,EHR prescription,device_exposure
+iud,iud,GyneFix intrauterine contraceptive device,21368650,GyneFix intrauterine contraceptive device (Williams Medical Supplies Ltd),45733502,80159020,32838,EHR prescription,device_exposure
+iud,iud,GyneFixPT intrauterine contraceptive device,21327814,GyneFixPT intrauterine contraceptive device (Family Planning Sales Ltd),45742532,80160020,32838,EHR prescription,device_exposure
+iud,iud,Load 375 intrauterine contraceptive device,21450903,Load 375 intrauterine contraceptive device (Durbin Plc),45742930,95068020,32838,EHR prescription,device_exposure
+iud,iud,Mini TT380 Slimline intrauterine contraceptive device,21441018,Mini TT380 Slimline intrauterine contraceptive device (Durbin Plc),37691792,1081021,32838,EHR prescription,device_exposure
+iud,iud,Multi-Safe 375 intrauterine contraceptive device,21368651,Multi-Safe 375 intrauterine contraceptive device (Williams Medical Supplies Ltd),45740978,87040020,32838,EHR prescription,device_exposure
+iud,iud,Multiload Cu250 Short intrauterine contraceptive device,21470538,Multiload Cu250 Short intrauterine contraceptive device (Organon Laboratories Ltd),45739887,56290020,32838,EHR prescription,device_exposure
+iud,iud,Multiload Cu250 intrauterine contraceptive device,21337994,Multiload Cu250 intrauterine contraceptive device (Organon Laboratories Ltd),45732589,56286020,32838,EHR prescription,device_exposure
+iud,iud,Multiload Cu375 intrauterine contraceptive device,21450144,Multiload Cu375 intrauterine contraceptive device (Organon Laboratories Ltd),45743543,59807020,32838,EHR prescription,device_exposure
+iud,iud,Neo-Safe T380 intrauterine contraceptive device,21481322,Neo-Safe T380 intrauterine contraceptive device (Williams Medical Supplies Ltd),45735661,90708020,32838,EHR prescription,device_exposure
+iud,iud,Nova-T 380 intrauterine contraceptive device,21399040,Nova-T 380 intrauterine contraceptive device (Bayer Plc),45742614,82859020,32838,EHR prescription,device_exposure
+iud,iud,Nova-T intrauterine contraceptive device,21399039,Nova-T intrauterine contraceptive device (Schering Health Care Ltd),45735926,48439020,32838,EHR prescription,device_exposure
+iud,iud,Novaplus T 380 Ag intrauterine contraceptive device maxi,21462392,Novaplus T 380 Ag intrauterine contraceptive device maxi (R.F. Medical Supplies Ltd),37772172,41956020,32838,EHR prescription,device_exposure
+iud,iud,Optima TCu 380A intrauterine contraceptive device,21350078,Optima TCu 380A intrauterine contraceptive device (Farla Medical Ltd),45730406,10675021,32838,EHR prescription,device_exposure
+iud,iud,T-Safe 380A QL intrauterine contraceptive device,21388824,T-Safe 380A QL intrauterine contraceptive device (Williams Medical Supplies Ltd),45731774,82861020,32838,EHR prescription,device_exposure
+iud,iud,TT380 Slimline intrauterine contraceptive device,21430445,TT380 Slimline intrauterine contraceptive device (Durbin Plc),45739413,95060020,32838,EHR prescription,device_exposure
+iud,iud,UT380 Short intrauterine contraceptive device,21389549,UT380 Short intrauterine contraceptive device (Durbin Plc),45735768,95062020,32838,EHR prescription,device_exposure
+iud,iud,UT380 Standard intrauterine contraceptive device,21349000,UT380 Standard intrauterine contraceptive device (Durbin Plc),45737616,95066020,32838,EHR prescription,device_exposure
