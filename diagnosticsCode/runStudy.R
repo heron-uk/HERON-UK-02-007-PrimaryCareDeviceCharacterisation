@@ -1,5 +1,5 @@
 
-to_run <- c("cgm","iud","silver_dressings",
+to_run <- c("cgm","iud","antimicrobial_dressings",
             "asthma","copd","insomnia")
 
 # create logger ----
@@ -22,8 +22,8 @@ if("iud" %in% to_run){
   source(here("iud", "cohorts", "instantiateCohorts.R"))
 }
 if("silver_dressings" %in% to_run){
-  logMessage("GETTING SILVER DRESSINGS COHORTS")
-  source(here("silver_dressings", "cohorts", "instantiateCohorts.R"))
+  logMessage("GETTING ANTIMICROBIAL DRESSINGS COHORTS")
+  source(here("antimicrobial_dressings", "cohorts", "instantiateCohorts.R"))
 }
 if("asthma" %in% to_run){
   logMessage("GETTING ASTHMA COHORTS")
