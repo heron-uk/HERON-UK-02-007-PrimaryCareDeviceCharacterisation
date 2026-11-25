@@ -1,8 +1,6 @@
-
-
 # cgm -----
-cgm_codes <- importCodelist(here("..", "diagnosticsCode",
-                           "cgm", "cohorts", "codelists"))
+cgm_codes <- importCodelist(here("codelist", "cgm"))
+
 cdm$cgm <- conceptCohort(cdm,
                          conceptSet = cgm_codes,
                          name = "cgm",
@@ -16,16 +14,27 @@ cdm$iud <- conceptCohort(cdm,
                          name = "iud",
                          exit = "event_start_date")
 
-# silver dressings -----
-silver_dressing_codes <- importCodelist(here("..", "diagnosticsCode",
-                                 "silver_dressings", "cohorts", "codelists"))
-cdm$silver_dressings <- conceptCohort(cdm,
-                         conceptSet = silver_dressing_codes,
-                         name = "silver_dressings",
-                         exit = "event_start_date")
-
 # bind
 cdm <- bind(cdm$cgm,
             cdm$iud,
-            cdm$silver_dressings,
             name = "study_cohorts")
+
+cdm$study_cohorts <- cdm$study_cohorts |>
+  requireIsFirstEntry() |>
+  requirePriorObservation(minPriorObservation = 365) |>
+  requireInDateRange(dateRange = study_period) |>
+  requireSex(sex = "Female",
+             cohortId = "iud")
+
+### Diabetes
+
+diabetes_cl <- importCodelist(here("codelist", "diabetes"))
+
+cdm$diabetes <- conceptCohort(cdm = cdm,
+                              conceptSet = diabetes_cl,
+                              name = "diabetes",
+                              exit = "event_start_date") |>
+  requireIsFirstEntry() |>
+  exitAtObservationEnd()
+
+
