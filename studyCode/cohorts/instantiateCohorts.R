@@ -41,20 +41,23 @@ cdm <- bind(cdm$cgm,
             cdm$antimicrobial_dressings,
             name = "study_cohorts")
 
+cohort_names <- settings(cdm$study_cohorts) |> pull(cohort_name)
+cohorts_30 <- cohort_names[!cohort_names %in% c("cgm", "iud")]
+
 cdm$study_cohorts <- cdm$study_cohorts |>
   requirePriorObservation(minPriorObservation = 365,
-                          atFirst = TRUE) |>
-  requireInDateRange(dateRange = study_period,
-                     indexDate = "cohort_end_date") |>
+                          atFirst = TRUE,
+                          cohortId = c("cgm", "iud")) |>
+  requirePriorObservation(minPriorObservation = 30,
+                          atFirst = TRUE,
+                          cohortId = cohorts_30) |>
+  requireInDateRange(dateRange = study_period) |>
   requireSex(sex = "Female",
              cohortId = "iud") |>
   requireAge(ageRange = c(18, 55),
              cohortId = "iud") |>
-  padCohortEnd(cohortId = "cgm",
-               days = 30,
-               collapse = TRUE) |>
   collapseCohorts(cohortId = "cgm",
-                  gap = 30)
+                  gap = 90)
 
 ### Diabetes
 
