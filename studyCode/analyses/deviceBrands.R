@@ -201,9 +201,22 @@ table((cohort_code_dre |> filter(is.na(Brand)) )$type)
 
 
 #Step 3
+<<<<<<< Updated upstream
 dressing_codes <- importCodelist(here("..", "diagnosticsCode",
                                              "antimicrobial_dressings", "cohorts", "codelists"))
 
 cdm$dre <- cdm$dre |>
   addConceptIntersectFlag(conceptSet = silver_dressing_codes )
+=======
+cdm$antimicrobial_dressings |> glimpse()
+dressing_codes <- importCodelist(here::here("codelist","dressing"))
+silver_codes <- list(silver=dressing_codes$silver_dressing)|> newCodelist()
+iodine_codes <- list(iodine=dressing_codes$iodine_dressing)|> newCodelist()
+honey_codes <- list(honey=dressing_codes$honey_dressing)|> newCodelist()
+dacc_codes <- list(dacc=dressing_codes$dacc_dressing)|> newCodelist()
+phmb_codes  <- list(phmb=dressing_codes$phmb_dressing)|> newCodelist()
+
+cdm$antimicrobial_dressings |>
+  addConceptIntersectFlag(conceptSet = dressing_codes)
+>>>>>>> Stashed changes
 
