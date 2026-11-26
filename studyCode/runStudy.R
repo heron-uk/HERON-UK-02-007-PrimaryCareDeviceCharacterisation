@@ -12,6 +12,7 @@ study_period <- c(as.Date("2015-01-01"), as.Date(NA))
 
 # Initialise list to store results as we go -----
 results <- list()
+source(here("functions.R"))
 
 # Create a log file ----
 createLogFile(logFile = file.path(results_folder, "log_{date}_{time}"))
