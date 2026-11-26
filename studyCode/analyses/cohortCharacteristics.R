@@ -1,4 +1,4 @@
-source(deviceBrands.R)
+source(here("analyses","deviceBrands.R"))
 
 results[["chars"]] <- summariseCharacteristics(
   cdm$study_cohorts,
