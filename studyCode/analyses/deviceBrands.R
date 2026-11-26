@@ -15,22 +15,22 @@ cohort_code_iud$`Source concept name` <-
   gsub("[(]","_",cohort_code_iud$`Source concept name`)
 #Add duration of IUD
 cohort_code_iud <- cohort_code_iud |>
-  separate(col=`Source concept name`,sep="_", remove=FALSE, into=c("Source concept name","Brand")) |>
-  select(c(`Standard concept ID`,`Standard concept name`,`Source concept name`,Brand)) |> arrange(Brand) |>
-  mutate(Duration=c(rep("5 years",5),rep("10 years",2),rep("5 years",3), "10 years",
+  separate(col=`Source concept name`,sep="_", remove=FALSE, into=c("Source concept name","brand")) |>
+  select(c(`Standard concept ID`,`Standard concept name`,`Source concept name`,brand)) |> arrange(brand) |>
+  mutate(duration=c(rep("5 years",5),rep("10 years",2),rep("5 years",3), "10 years",
                        rep("5 years",4),"10 years",rep("5 years",6),"10 years","5 years",rep("10 years",2))) |>
   rename("concept_ID"=1,"Standard_concept_name"=2,"Source_concept_name"=3)
 cohort_code_iud |> print(n=Inf)
 
 
 #Step 2
-#Summarise by Duration
-cohort_code_iud |> arrange(desc(Duration),Brand) |> print(n=Inf)
-#Summarise by Brand
-cohort_code_iud |> arrange(Brand,desc(Duration)) |> print(n=Inf)
-data.frame(table(cohort_code_iud$Brand)) |> arrange(Freq)
+#Summarise by duration
+cohort_code_iud |> arrange(desc(duration),brand) |> print(n=Inf)
+#Summarise by brand
+cohort_code_iud |> arrange(brand,desc(duration)) |> print(n=Inf)
+data.frame(table(cohort_code_iud$brand)) |> arrange(Freq)
 cohort_code_iud |>
-  group_by(Brand,Duration) |>
+  group_by(brand,duration) |>
   summarise(Models=length(unique(Source_concept_name)) )
 #compare codes
 table(iud_codes$iud %in% cohort_code_iud$`concept_ID`)
@@ -38,57 +38,60 @@ add_iud_codes <- data.frame(c(iud_codes$iud), c(iud_codes$iud %in% cohort_code_i
   rename(concept_ID=1,inc=2) |> filter(inc=="FALSE") |> select(concept_ID) |>
   mutate(Standard_concept_name = c("Steriload", "Ancora 375 Ag", "IUB Ballerine MIDI"),
          Source_concept_name = Standard_concept_name,
-         Brand = c("Farla Medical Ltd","R.F. Medical Supplies Ltd","OCON Medical Ltd"),
-         Duration = c("Unknown",rep("5 years",2)) )
+         brand = c("Farla Medical Ltd","R.F. Medical Supplies Ltd","OCON Medical Ltd"),
+         duration = c("Unknown",rep("5 years",2)) )
 add_iud_codes
-cohort_code_iud <- rbind(add_iud_codes,cohort_code_iud) |> arrange(Brand,desc(Duration))
-cohort_code_iud
+cohort_code_iud <- rbind(add_iud_codes,cohort_code_iud) |>
+  arrange(brand,desc(duration)) |>
+  rename(concept_name=Standard_concept_name)
+cohort_code_iud |>
+  rename(concept_name=Standard_concept_name)
 
 
 #Step 3
-#Step 3a: Duration
+#Step 3a: duration
 ##Step 3a.1 - 5 years
-(cohort_code_iud %>% filter(Duration=="5 years") )$concept_ID
+(cohort_code_iud %>% filter(duration=="5 years") )$concept_ID
 iud_5years <- list("5years"= c(21399040, 21470537, 21348967, 21450903, 21441018, 21349000, 21327814, 21350078,
                                21470538, 21337994, 21450144, 21390888, 21329906, 21421598, 21360574, 21421597,
                                21462392, 21399039, 21368651, 21442060, 36047594 )) |> newCodelist()
 ##Step 3a.2 - 10 years
-(cohort_code_iud %>% filter(Duration=="10 years") )$concept_ID
+(cohort_code_iud %>% filter(duration=="10 years") )$concept_ID
 iud_10years <- list("10years"=c(21430445, 21389549, 21389357, 21411274, 21368650, 21481322, 21388824)) |>
   newCodelist()
-#Step 3b: Brand
+#Step 3b: brand
 ##Step 3b.1 - Bayer Plc
-(cohort_code_iud %>% filter(Brand=="Bayer Plc") )$concept_ID
+(cohort_code_iud %>% filter(brand=="Bayer Plc") )$concept_ID
 iud_BayerPlc <- list("BayerPlc"=c(21399040)) |> newCodelist()
 ##Step 3b.2 - Durbin Plc
-(cohort_code_iud %>% filter(Brand=="Durbin Plc") )$concept_ID
+(cohort_code_iud %>% filter(brand=="Durbin Plc") )$concept_ID
 iud_DurbinPlc <- list("DurbinPlc"=c(21470537, 21348967, 21450903, 21441018, 21430445, 21389549, 21349000)) |>
   newCodelist()
 ##Step 3b.3 - Family Planning Sales Ltd
-(cohort_code_iud %>% filter(Brand=="Family Planning Sales Ltd") )$concept_ID
+(cohort_code_iud %>% filter(brand=="Family Planning Sales Ltd") )$concept_ID
 iud_FamilyPlanningSalesLtd <- list("FamilyPlanningSalesLtd"=c(21327814)) |> newCodelist()
 ##Step 3b.4 - Farla Medical Ltd
-(cohort_code_iud %>% filter(Brand=="Farla Medical Ltd") )$concept_ID
+(cohort_code_iud %>% filter(brand=="Farla Medical Ltd") )$concept_ID
 iud_FarlaMedicalLtd <- list("FarlaMedicalLtd"=c(21350078, 21380323)) |> newCodelist()
 ##Step 3b.5 - Janssen-Cilag Ltd
-(cohort_code_iud %>% filter(Brand=="Janssen-Cilag Ltd") )$concept_ID
+(cohort_code_iud %>% filter(brand=="Janssen-Cilag Ltd") )$concept_ID
 iud_JanssenCilagLtd <- list("JanssenCilagLtd"=c(21389357)) |> newCodelist()
 ##Step 3b.6 - Organon Laboratories Ltd
-(cohort_code_iud %>% filter(Brand=="Organon Laboratories Ltd") )$concept_ID
+(cohort_code_iud %>% filter(brand=="Organon Laboratories Ltd") )$concept_ID
 iud_OrganonLaboratoriesLtd <- list("OrganonLaboratoriesLtd"=c(21470538, 21337994, 21450144)) |> newCodelist()
 ##Step 3b.7 - R.F. Medical Supplies Ltd
-(cohort_code_iud %>% filter(Brand=="R.F. Medical Supplies Ltd") )$concept_ID
+(cohort_code_iud %>% filter(brand=="R.F. Medical Supplies Ltd") )$concept_ID
 iud_RFMedicalSuppliesLtd <- list("RFMedicalSuppliesLtd"=c(21390888, 21411274, 21329906, 21421598, 21360574,
                                                           21421597, 21462392, 21442060)) |> newCodelist()
 ##Step 3b.8 - Schering Health Care Ltd
-(cohort_code_iud %>% filter(Brand=="Schering Health Care Ltd") )$concept_ID
+(cohort_code_iud %>% filter(brand=="Schering Health Care Ltd") )$concept_ID
 iud_ScheringHealthCareLtd <- list("ScheringHealthCareLtd"=c(21399039)) |> newCodelist()
 ##Step 3b.9 - Williams Medical Supplies Ltd
-(cohort_code_iud %>% filter(Brand=="Williams Medical Supplies Ltd") )$concept_ID
+(cohort_code_iud %>% filter(brand=="Williams Medical Supplies Ltd") )$concept_ID
 iud_WilliamsMedicalSuppliesLtd <- list("WilliamsMedicalSuppliesLtd"=c(21368650, 21368651, 21481322, 21388824)) |>
   newCodelist()
 ##Step 3b.9 - Williams Medical Supplies Ltd
-(cohort_code_iud %>% filter(Brand=="OCON Medical Ltd") )$concept_ID
+(cohort_code_iud %>% filter(brand=="OCON Medical Ltd") )$concept_ID
 iud_OCONMedicalLtd <- list("OCONMedicalLtd"=c(36047594)) |> newCodelist()
 
 
@@ -119,15 +122,15 @@ cohort_code_cgm <- summarise_cohort_code_cgm[c(4,3,5)] |> rename(concept_ID=1,co
 glimpse(cohort_code_cgm )
 cohort_code_cgm$concept_name <- gsub(" Sensor","",cohort_code_cgm$concept_name)
 cohort_code_cgm <- cohort_code_cgm |>
-  mutate(Brand = ifelse(str_detect(concept_name, "Dexcom")==TRUE,"Dexcom",
+  mutate(brand = ifelse(str_detect(concept_name, "Dexcom")==TRUE,"Dexcom",
                     ifelse(str_detect(concept_name, "FreeStyle Libre")==TRUE,"FreeStyle Libre","NA") )) |>
-  select(concept_ID, concept_name,Brand)
+  select(concept_ID, concept_name,brand)
 cohort_code_cgm |> print(n=Inf)
 
 
 #Step 2
-#Summarise by Brand
-cohort_code_cgm |> arrange(Brand) |> print(n=Inf)
+#Summarise by brand
+cohort_code_cgm |> arrange(brand) |> print(n=Inf)
 #compare codes
 table(cgm_codes$cgm %in% cohort_code_cgm$concept_ID)
 data.frame(c(cgm_codes$cgm), c(cgm_codes$cgm %in% cohort_code_cgm$concept_ID)) |>
@@ -170,11 +173,11 @@ add_cgm_codes <- data.frame(c(cgm_codes$cgm), c(cgm_codes$cgm %in% cohort_code_c
                                    "FreeStyle Libre 2 Plus","FreeStyle Libre 2",rep("Dexcom One",2),
                                    rep("FreeStyle Libre",2)),
          Source_concept_name = concept_name,
-         Brand = c("FreeStyle Libre",rep("Dexcom",2),"Medtrum",rep("Dexcom",2),"Medtrum","Dexcom","spirit health",
+         brand = c("FreeStyle Libre",rep("Dexcom",2),"Medtrum",rep("Dexcom",2),"Medtrum","Dexcom","spirit health",
                    "FreeStyle Libre","spirit health",rep("FreeStyle Libre",3),rep("Dexcom",2),
                    rep("FreeStyle Libre",2))  )
 add_cgm_codes
-cohort_code_cgm <- unique(rbind(add_cgm_codes[c(1,2,4)],cohort_code_cgm)) |> arrange(Brand,concept_name)
+cohort_code_cgm <- unique(rbind(add_cgm_codes[c(1,2,4)],cohort_code_cgm)) |> arrange(brand,concept_name)
 cohort_code_cgm
 
 
@@ -193,30 +196,27 @@ cohort_code_dre$`Source concept name` <-
 cohort_code_dre$`Source concept name` <-
   gsub("[(]","_",cohort_code_dre$`Source concept name`)
 cohort_code_dre <- cohort_code_dre |>
-  separate(col=`Source concept name`,sep="_", remove=TRUE, into=c("Source","Brand")) |>
-  select(!c("Source"))
+  separate(col=`Source concept name`,sep="_", remove=TRUE, into=c("Source","brand")) |>
+  select(!c("Source")) |>
+  mutate(brand=ifelse(str_detect(brand, " x | X |mm hole")==TRUE, NA,brand))
 cohort_code_dre
 table(cohort_code_dre$type)
-table((cohort_code_dre |> filter(is.na(Brand)) )$type)
+table((cohort_code_dre |> filter(is.na(brand)) )$type)
 
 
 #Step 3
-<<<<<<< Updated upstream
-dressing_codes <- importCodelist(here("..", "diagnosticsCode",
-                                             "antimicrobial_dressings", "cohorts", "codelists"))
-
-cdm$dre <- cdm$dre |>
-  addConceptIntersectFlag(conceptSet = silver_dressing_codes )
-=======
+dressing_codes <- importCodelist(here("codelist","dressing"))
 cdm$antimicrobial_dressings |> glimpse()
-dressing_codes <- importCodelist(here::here("codelist","dressing"))
-silver_codes <- list(silver=dressing_codes$silver_dressing)|> newCodelist()
-iodine_codes <- list(iodine=dressing_codes$iodine_dressing)|> newCodelist()
-honey_codes <- list(honey=dressing_codes$honey_dressing)|> newCodelist()
-dacc_codes <- list(dacc=dressing_codes$dacc_dressing)|> newCodelist()
-phmb_codes  <- list(phmb=dressing_codes$phmb_dressing)|> newCodelist()
-
-cdm$antimicrobial_dressings |>
+cdm$antimicrobial_dressings <- cdm$antimicrobial_dressings |>
   addConceptIntersectFlag(conceptSet = dressing_codes)
->>>>>>> Stashed changes
+
+##### Summary ####
+
+cohort_codes <- rbind(cohort_code_dre |> mutate(duration=NA,implant="dressings"),
+      cohort_code_iud |> mutate(type=NA,implant="iud") |> select(!c(Source_concept_name)),
+      cohort_code_cgm |> mutate(type=NA,duration=NA,implant="cgm")) |>
+  select(concept_ID,implant,type,brand,concept_name,duration) |>
+  arrange(implant,type,brand,duration,concept_name)
+cohort_codes
+results[["cohort_codes"]] <- cohort_codes
 
