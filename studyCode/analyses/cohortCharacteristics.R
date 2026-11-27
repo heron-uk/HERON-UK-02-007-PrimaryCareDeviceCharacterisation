@@ -3,9 +3,9 @@ source(here("analyses","deviceBrands.R"))
 
 results[["chars_cgm"]] <- summariseCharacteristics(
   cdm$cgm |>
-    addAge( ageGroup = list(c(0,17), c(18, Inf)) ),
+    addAge( ageGroup = list(c(0,17), c(18, 64), c(65, Inf)) ),
   otherVariables = c("brand"),
-  strata=list("sex","age_group")
+  strata=list("diabetes")
   )
 
 results[["chars_iud"]] <- summariseCharacteristics(
@@ -15,6 +15,13 @@ results[["chars_iud"]] <- summariseCharacteristics(
   otherVariables = c("brand"),
   strata = list("duration")
   )
+
+results[["chars_dressings"]] <- summariseCharacteristics(
+  cdm$antimicrobial_dressings |>
+    addAge( ageGroup = list(c(0,17), c(18, 64), c(65, Inf)) ),
+  otherVariables = c("brand"),
+  strata = list("type")
+)
 
 results[["sum_large_chars"]] <- summariseLargeScaleCharacteristics(
   cdm$study_cohorts,

@@ -24,6 +24,10 @@ cdm$silver_dressings <- conceptCohort(cdm,
                          name = "silver_dressings",
                          exit = "event_start_date")
 
+# asthma app ------
+asthma_codes <- importCodelist(here("..", "diagnosticsCode",
+                                             "asthma/cohorts", "codelists"))
+
 # bind
 cdm <- bind(cdm$cgm,
             cdm$iud,
