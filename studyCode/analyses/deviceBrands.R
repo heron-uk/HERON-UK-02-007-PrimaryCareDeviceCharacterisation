@@ -184,7 +184,15 @@ cdm$cgm <- cdm$cgm |>
   addConceptIntersectFlag(conceptSet = cgm_dexcom_codes,window=c(0,0)) |>
   addConceptIntersectFlag(conceptSet = cgm_freestyle_libre,window=c(0,0)) |>
   mutate(brand=ifelse(cgm_dexcom_0_to_0==1,"Dexcom",
+<<<<<<< Updated upstream
                       ifelse(cgm_freestyle_libre_0_to_0==1,"Freestyle Libre","Other")))
+=======
+                      ifelse(cgm_freestyle_libre_0_to_0==1,"Freestyle Libre","Other"))) |>
+  addConceptIntersectFlag(conceptSet = list(type1=diabetes_cl$t1dm),window=c(0,0)) |>
+  addConceptIntersectFlag(conceptSet = list(type2=diabetes_cl$t2dm),window=c(0,0)) |>
+  mutate(diabetes=ifelse(type1_0_to_0==1,"type I",
+                      ifelse(type2_0_to_0==1,"type II","Other")))
+>>>>>>> Stashed changes
 
 
 
@@ -193,6 +201,7 @@ cdm$cgm <- cdm$cgm |>
 
 #Step 1
 summarise_cohort_code_dressings <- unique(read_csv("analyses/summarise_cohort_code_use_dressings.csv"))
+<<<<<<< Updated upstream
 cohort_code_dre <- summarise_cohort_code_dressings[c(2,4,3,5)]|>
   rename(concept_ID=2,concept_name=3,type=1) |>
   filter(!type=="antimicrobial_dressing")
@@ -203,11 +212,24 @@ cohort_code_dre$`Source concept name` <-
 cohort_code_dre$`Source concept name` <-
   gsub("[(]","_",cohort_code_dre$`Source concept name`)
 cohort_code_dre <- cohort_code_dre |>
+=======
+cohort_code_dress <- summarise_cohort_code_dressings[c(2,4,3,5)]|>
+  rename(concept_ID=2,concept_name=3,type=1) |>
+  filter(!type=="antimicrobial_dressing")
+glimpse(cohort_code_dress)
+#Clean names
+cohort_code_dress$`Source concept name` <-
+  gsub("[)]","",cohort_code_dress$`Source concept name`)
+cohort_code_dress$`Source concept name` <-
+  gsub("[(]","_",cohort_code_dress$`Source concept name`)
+cohort_code_dress <- cohort_code_dress |>
+>>>>>>> Stashed changes
   separate(col=`Source concept name`,sep="_", remove=TRUE, into=c("Source","brand")) |>
   select(!c("Source")) |>
   mutate(brand=ifelse(str_detect(brand, " x | X |mm hole|fenestrated")==TRUE, NA,brand)) |>
   arrange(type,brand,concept_name)
 #Summarise by brand
+<<<<<<< Updated upstream
 cohort_code_dr
 data.frame(table(cohort_code_dre$brand)) |> arrange(Freq)
 table(cohort_code_dre$type)
@@ -221,11 +243,45 @@ cdm$antimicrobial_dressings |> glimpse()
 cdm$antimicrobial_dressings <- cdm$antimicrobial_dressings |>
   addConceptIntersectFlag(conceptSet = dressing_codes)
 
+=======
+cohort_code_dress
+data.frame(table(cohort_code_dress$brand)) |> arrange(Freq)
+table(cohort_code_dress$type)
+table((cohort_code_dress |> filter(is.na(brand)) )$type)
+
+
+#Step 2
+table(dress_codes$antimicrobial_dressing %in% cohort_code_dress$concept_ID)
+data.frame(c(dress_codes$antimicrobial_dressing),
+           c(dress_codes$antimicrobial_dressing %in% cohort_code_dress$`concept_ID`)) |>
+  rename(concept_ID=1,inc=2) |> filter(inc=="FALSE") |> select(concept_ID)
+
+
+#Step 3
+cdm$antimicrobial_dressings |> glimpse()
+cdm$antimicrobial_dressings <- cdm$antimicrobial_dressings |>
+  addConceptIntersectFlag(conceptSet = dress_codes)
+cdm$antimicrobial_dressings <- cdm$antimicrobial_dressings |>
+  addConceptIntersectFlag(conceptSet = list(dacc = dress_codes$dacc_dressing),window=c(0,0)) |>
+  addConceptIntersectFlag(conceptSet = list(honey = dress_codes$honey_dressing),window=c(0,0)) |>
+  addConceptIntersectFlag(conceptSet = list(iodine = dress_codes$iodine_dressing),window=c(0,0)) |>
+  addConceptIntersectFlag(conceptSet = list(silver = dress_codes$silver_dressing),window=c(0,0)) |>
+  addConceptIntersectFlag(conceptSet = list(phmb = dress_codes$phmb_dressing),window=c(0,0)) |>
+  mutate(type=ifelse(dacc_0_to_0==1,"DACC",
+                      ifelse(honey_0_to_0==1,"honey",
+                             ifelse(silver_0_to_0==1,"silver",
+                                    ifelse(iodine_0_to_0==1,"iodine",
+                                           ifelse(phmb_0_to_0==1,"PHMB",NA))))) )
+>>>>>>> Stashed changes
 
 
 ##### Summary ####
 
+<<<<<<< Updated upstream
 cohort_codes <- rbind(cohort_code_dre |> mutate(duration=NA,device="dressings"),
+=======
+cohort_codes <- rbind(cohort_code_dress |> mutate(duration=NA,device="dressings"),
+>>>>>>> Stashed changes
       cohort_code_iud |> mutate(type=NA,device="iud") |> select(!c(Source_concept_name)),
       cohort_code_cgm |> mutate(type=NA,duration=NA,device="cgm")) |>
   select(concept_ID,device,type,brand,concept_name,duration) |>
