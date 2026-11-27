@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+source(here("analyses","deviceBrands.R"))
+>>>>>>> d225807518f32ec130c78a0f41f7e632aed2c05e
 
 results[["chars"]] <- summariseCharacteristics(
   cdm$study_cohorts,
