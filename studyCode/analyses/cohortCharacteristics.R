@@ -1,12 +1,5 @@
-<<<<<<< HEAD
-=======
-source(here("analyses","deviceBrands.R"))
->>>>>>> d225807518f32ec130c78a0f41f7e632aed2c05e
 
-results[["chars"]] <- summariseCharacteristics(
-  cdm$study_cohorts,
-  ageGroup = list(c(0,17), c(18, Inf))
-  )
+source(here("analyses","deviceBrands.R"))
 
 results[["chars_cgm"]] <- summariseCharacteristics(
   cdm$cgm |>
@@ -28,5 +21,3 @@ results[["sum_large_chars"]] <- summariseLargeScaleCharacteristics(
   window = list(c(31, 1825)),
   eventInWindow = "condition_occurrence"
   )
-
-
